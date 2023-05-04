@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Package
-        run: zip -r Pirate-Cat-Quotes.${{ env.VERSION }}.zip ./app
+        run: zip -r Pirate-Cat-Quotes.${{ env.VERSION }}.zip main.py
 
       - name: Push a package to Octopus Deploy 🐙
         uses: OctopusDeploy/push-package-action@v3
