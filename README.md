@@ -1,0 +1,1 @@
+![cat_pirate](./assets/cat_pirate.png)
