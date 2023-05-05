@@ -28,7 +28,6 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - run: ls
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image
         with:
