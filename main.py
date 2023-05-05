@@ -55,6 +55,8 @@ def post_to_linkedin(post_text: str, user_id: str, bearer_token: str, img: Optio
 
 def main(send_to_linkedin: bool, user_id: Optional[str] = None, bearer_token: Optional[str] = None):
 
+    print("WOW")
+
     inspirational_quote = clean_text(generate_quote())
     print(inspirational_quote)
 
