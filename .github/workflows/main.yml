@@ -38,8 +38,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build & push Docker image
+        with:
+          image: paulegradie/fun-apps
+          tags: linkedin-latest
+          registry: docker.io
+          dockerfile: ./DOCKERFILE.linkedin
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Package
-        run: zip Pirate-Cat-Quotes.${{ env.VERSION }}.zip main.py .env
+        run: zip Pirate-Cat-Quotes.${{ env.VERSION }}.zip linkedin.py .env
 
       - name: Push a package to Octopus Deploy 🐙
         uses: OctopusDeploy/push-package-action@v3
