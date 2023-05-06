@@ -68,14 +68,13 @@ def main(
 
 
 if __name__ == "__main__":
-    DEFAULT_PROMPT = "Write a 125 word inspirational quote for linkedIn for an audience of people struggling to find a job that is sure to get a big response"
+    DEFAULT_PROMPT = "Write a 125 word inspirational quote for an audience of people struggling to find a job that is sure to get a big response on linkedIn"
     parser = argparse.ArgumentParser(
         prog='Cat Pirate Quotes - LinkedIn',
         description='Uses chatGPT to generate text and post it to LinkedIn',
         epilog='Use with caution - who knows what chatGPT will say!')
     parser.add_argument('-s', '--post', required=False, action='store_true')
-    parser.add_argument('-m', '--model', required=False,
-                        default="text-davinci-003")
+    parser.add_argument('-m', '--model', required=False, default="text-davinci-003")
     parser.add_argument('-p', '--prompt', default=DEFAULT_PROMPT)
 
     if os.path.exists(".env.development"):
@@ -92,6 +91,7 @@ if __name__ == "__main__":
         args = parser.parse_args()
         linkedin_user_id = args.linkedin_id
         linkedin_bearer_token = args.linkedin_token
+        openAiApiKey = args.openai_apikey
 
     openai.api_key = openAiApiKey
     main(
