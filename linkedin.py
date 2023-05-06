@@ -67,55 +67,69 @@ def main(
                          bearer_token=bearer_token)
 
 def decorate_prompt(prompt: str, formatter: str):
-    return formatter + prompt + " in around 100 words that will well received"
+    return formatter + prompt.lower() + " in around 100 words that will well received."
 
 if __name__ == "__main__":
     CURIOSITY_PROMPTS = [
          "important concept in software engineering that should get more attention"
     ]
     INSPIRATIONAL_PROMPTS = [
+        "improving culture in software engineering companies"
         "Overcoming obstacles and adversity",
-        "The power of positivity and gratitude",
-        "Finding happiness in small moments",
         "Embracing change and growth",
         "The importance of self-care and self-love",
-        "Living a purposeful life",
         "Turning failures into opportunities",
-        "Making a difference in the world",
         "Building resilience and inner strength",
         "Finding inner peace and tranquility",
         "The value of perseverance and hard work",
         "The beauty of diversity and inclusivity",
         "The impact of kindness and compassion",
         "Letting go of fear and embracing courage",
-        "The power of forgiveness and healing",
         "Empowering others to succeed",
         "Trusting the journey and having faith",
         "Finding inspiration in nature and the world around us",
         "Cultivating healthy relationships and connections",
-        "The importance of staying true to oneself and authenticity",
         "Learning and growing as a software engineering leader",
         "Learning and growing as a software engineer",
         "People struggling to find a job"]
 
+    FUN_FACT_TOPICS = [
+        "Space",
+        "History",
+        "Music",
+        "Science",
+        "Movies",
+        "Geography",
+        "Art",
+        "Inventions",
+        "Fashion",
+        "Literature",
+        "Mythology",
+        "Technology",
+        "Holidays",
+        "Transportation",
+    ]
+
     PROMPT_SETS = {
         0: {
             'formatter': "Write an uplifting and inspirational quote about ",
-            'prompt_set': CURIOSITY_PROMPTS
+            'prompt_set': INSPIRATIONAL_PROMPTS
         },
-        # 1: {
-        #     'formatter': "Write an interesting or insightful statement about",
-        #     'prompt_set': INSPIRATIONAL_PROMPTS
-        # }
+        1: {
+            'formatter': "Write a fun fact about ",
+            'prompt_set': FUN_FACT_TOPICS
+        }
     }
 
     num_prompts = len(PROMPT_SETS.keys())
-    INDEX_CHOICE = [x for x in range(num_prompts)][random.randint(0, num_prompts - 1)]
+    INDEX_CHOICE = random.randint(0, num_prompts - 1)
 
     prompt = PROMPT_SETS[INDEX_CHOICE]['prompt_set'][random.randint(0, len(PROMPT_SETS[INDEX_CHOICE]) - 1)]
     formatter = PROMPT_SETS[INDEX_CHOICE]['formatter']
     DEFAULT_PROMPT = decorate_prompt(prompt, formatter);
-
+    print()
+    print(DEFAULT_PROMPT)
+    print()
     parser = argparse.ArgumentParser(
         prog='Cat Pirate Quotes - LinkedIn',
         description='Uses chatGPT to generate text and post it to LinkedIn',
