@@ -29,7 +29,7 @@ def post_to_linkedin(post_text: str, user_id: str, bearer_token: str, img: Optio
         "x-li-format": "json"
     }
     data = json.dumps({
-        "author": f"urn:li:person:{user_id}",
+        "author": f"urn:li:{user_id}",
         "lifecycleState": "PUBLISHED",
         "specificContent": {
             "com.linkedin.ugc.ShareContent": {
