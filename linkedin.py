@@ -66,12 +66,14 @@ def main(
         post_to_linkedin(inspirational_quote, user_id=user_id,
                          bearer_token=bearer_token)
 
-def decorate_prompt(raw_prompt: str):
-    return "Write an uplifting and inspirational quote about or for " + raw_prompt.lower() + " in around 100 words that will well received"
+def decorate_prompt(prompt: str, formatter: str):
+    return formatter + prompt + " in around 100 words that will well received"
 
 if __name__ == "__main__":
-
-    RAW_PROMPTS = [
+    CURIOSITY_PROMPTS = [
+         "important concept in software engineering that should get more attention"
+    ]
+    INSPIRATIONAL_PROMPTS = [
         "Overcoming obstacles and adversity",
         "The power of positivity and gratitude",
         "Finding happiness in small moments",
@@ -95,8 +97,24 @@ if __name__ == "__main__":
         "Learning and growing as a software engineering leader",
         "Learning and growing as a software engineer",
         "People struggling to find a job"]
-    DECORATED_PROMPTS = [decorate_prompt(x) for x in RAW_PROMPTS]
-    DEFAULT_PROMPT = DECORATED_PROMPTS[random.randint(0, len(DECORATED_PROMPTS)-1)]
+
+    PROMPT_SETS = {
+        0: {
+            'formatter': "Write an uplifting and inspirational quote about ",
+            'prompt_set': CURIOSITY_PROMPTS
+        },
+        # 1: {
+        #     'formatter': "Write an interesting or insightful statement about",
+        #     'prompt_set': INSPIRATIONAL_PROMPTS
+        # }
+    }
+
+    num_prompts = len(PROMPT_SETS.keys())
+    INDEX_CHOICE = [x for x in range(num_prompts)][random.randint(0, num_prompts - 1)]
+
+    prompt = PROMPT_SETS[INDEX_CHOICE]['prompt_set'][random.randint(0, len(PROMPT_SETS[INDEX_CHOICE]) - 1)]
+    formatter = PROMPT_SETS[INDEX_CHOICE]['formatter']
+    DEFAULT_PROMPT = decorate_prompt(prompt, formatter);
 
     parser = argparse.ArgumentParser(
         prog='Cat Pirate Quotes - LinkedIn',
@@ -112,7 +130,6 @@ if __name__ == "__main__":
         linkedin_bearer_token = config["LINKEDIN_TOKEN"]
         openAiApiKey = config["OPENAI_APIKEY"]
         args = parser.parse_args()
-
     else:
         parser.add_argument('-u', '--linkedin-id', required=True)
         parser.add_argument('-l', '--linkedin-token', required=True)
