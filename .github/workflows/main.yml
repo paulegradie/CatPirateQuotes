@@ -32,16 +32,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - uses: addnab/docker-run-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          registry: docker.io
-          image: paulegradie/fun-apps:latest-linkedin
-          options: -s -u ${{ secrets.LINKEDIN_ID }} -l ${{ secrets.LINKEDIN_TOKEN }} -o ${{ secrets.OPENAI_APIKEY }}
-
-      # - uses: actions/setup-python@v4
+      # - uses: addnab/docker-run-action@v3
       #   with:
-      #     python-version: "3.9"
-      #     cache: "pip" # caching pip dependencies
-      # - run: pip install -r requirements.txt && python linkedin.py -s -u ${{ secrets.LINKEDIN_ID }} -l ${{ secrets.LINKEDIN_TOKEN }} -o ${{ secrets.OPENAI_APIKEY }}
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #     registry: docker.io
+      #     image: paulegradie/fun-apps:latest-linkedin
+      #     options: -s -u ${{ secrets.LINKEDIN_COMPANYID }} -l ${{ secrets.LINKEDIN_TOKEN }} -o ${{ secrets.OPENAI_APIKEY }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "pip" # caching pip dependencies
+      - run: pip install -r requirements.txt && python linkedin.py -s -u ${{ secrets.LINKEDIN_COMPANYID }} -l ${{ secrets.LINKEDIN_TOKEN }} -o ${{ secrets.OPENAI_APIKEY }}
