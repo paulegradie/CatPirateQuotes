@@ -91,7 +91,7 @@ if __name__ == "__main__":
         parser.add_argument('-o', '--openai-apikey', required=True)
         args = parser.parse_args()
         linkedin_user_id = args.linkedin_id
-        linkedin_bearer_token = args.bearer_token
+        linkedin_bearer_token = args.linkedin_token
 
     openai.api_key = openAiApiKey
     main(
