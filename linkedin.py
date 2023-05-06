@@ -5,7 +5,7 @@ import openai
 import json
 from typing import Optional
 import argparse
-
+import random
 
 def generate_quote(prompt: str, model: str):
     completion = openai.Completion.create(
@@ -66,9 +66,38 @@ def main(
         post_to_linkedin(inspirational_quote, user_id=user_id,
                          bearer_token=bearer_token)
 
+def decorate_prompt(raw_prompt: str):
+    return "Write an uplifting and inspirational quote about or for " + raw_prompt.lower() + " in around 100 words that will well received"
 
 if __name__ == "__main__":
-    DEFAULT_PROMPT = "Write a 125 word inspirational quote for an audience of people struggling to find a job that is sure to get a big response on linkedIn"
+
+    RAW_PROMPTS = [
+        "Overcoming obstacles and adversity",
+        "The power of positivity and gratitude",
+        "Finding happiness in small moments",
+        "Embracing change and growth",
+        "The importance of self-care and self-love",
+        "Living a purposeful life",
+        "Turning failures into opportunities",
+        "Making a difference in the world",
+        "Building resilience and inner strength",
+        "Finding inner peace and tranquility",
+        "The value of perseverance and hard work",
+        "The beauty of diversity and inclusivity",
+        "The impact of kindness and compassion",
+        "Letting go of fear and embracing courage",
+        "The power of forgiveness and healing",
+        "Empowering others to succeed",
+        "Trusting the journey and having faith",
+        "Finding inspiration in nature and the world around us",
+        "Cultivating healthy relationships and connections",
+        "The importance of staying true to oneself and authenticity",
+        "Learning and growing as a software engineering leader",
+        "Learning and growing as a software engineer",
+        "People struggling to find a job"]
+    DECORATED_PROMPTS = [decorate_prompt(x) for x in RAW_PROMPTS]
+    DEFAULT_PROMPT = DECORATED_PROMPTS[random.randint(0, len(DECORATED_PROMPTS)-1)]
+
     parser = argparse.ArgumentParser(
         prog='Cat Pirate Quotes - LinkedIn',
         description='Uses chatGPT to generate text and post it to LinkedIn',

@@ -23,20 +23,10 @@ jobs:
           fetch-depth: 0
 
       - uses: mr-smithers-excellent/docker-build-push@v6
-        name: Build & push Docker image
+        name: Build & Push 
         with:
           image: paulegradie/fun-apps
-          tags: latest
-          registry: docker.io
-          dockerfile: ./DOCKERFILE
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - uses: mr-smithers-excellent/docker-build-push@v6
-        name: Build & push Docker image
-        with:
-          image: paulegradie/fun-apps
-          tags: linkedin-latest
+          tags: latest-linkedin
           registry: docker.io
           dockerfile: ./DOCKERFILE.linkedin
           username: ${{ secrets.DOCKERHUB_USERNAME }}
