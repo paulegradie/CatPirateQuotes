@@ -1,8 +1,8 @@
 name: 🪐 Send Post
 
 on:
-  # schedule:
-    # - cron: '0 */4 * * *'
+  schedule:
+    - cron: "0 */3 * * *"
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
 
       - uses: mr-smithers-excellent/docker-build-push@v6
-        name: Build & Push 
+        name: Build & Push
         with:
           image: paulegradie/fun-apps
           tags: latest-linkedin
@@ -34,6 +34,6 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
-          cache: 'pip' # caching pip dependencies
+          python-version: "3.9"
+          cache: "pip" # caching pip dependencies
       - run: pip install -r requirements.txt && python linkedin.py -s -u ${{ secrets.LINKEDIN_ID }} -l ${{ secrets.LINKEDIN_TOKEN }} -o ${{ secrets.OPENAI_APIKEY }}
