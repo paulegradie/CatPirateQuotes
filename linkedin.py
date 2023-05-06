@@ -113,11 +113,13 @@ if __name__ == "__main__":
     PROMPT_SETS = {
         0: {
             'formatter': "Write an uplifting and inspirational quote about ",
-            'prompt_set': INSPIRATIONAL_PROMPTS
+            'prompt_set': INSPIRATIONAL_PROMPTS,
+            'suffix': ""
         },
         1: {
             'formatter': "Write a fun fact about ",
-            'prompt_set': FUN_FACT_TOPICS
+            'prompt_set': FUN_FACT_TOPICS,
+            'suffix': "Start the prompt with the words: \"Fun Fact: \""
         }
     }
 
