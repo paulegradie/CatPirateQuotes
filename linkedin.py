@@ -80,17 +80,17 @@ if __name__ == "__main__":
 
     if os.path.exists(".env.development"):
         config = dotenv_values(".env.development")
-        linkedin_user_id = config["LINKEDIN_USER_ID"]
-        linkedin_bearer_token = config["LINKEDIN_APIKEY"]
-        openAiApiKey = config["OPENAI_API_KEY"]
+        linkedin_user_id = config["LINKEDIN_ID"]
+        linkedin_bearer_token = config["LINKEDIN_TOKEN"]
+        openAiApiKey = config["OPENAI_APIKEY"]
         args = parser.parse_args()
 
     else:
-        parser.add_argument('-u', '--user-id', required=True)
+        parser.add_argument('-u', '--linkedin-id', required=True)
         parser.add_argument('-l', '--linkedin-token', required=True)
         parser.add_argument('-o', '--openai-apikey', required=True)
         args = parser.parse_args()
-        linkedin_user_id = args.user_id
+        linkedin_user_id = args.linkedin_id
         linkedin_bearer_token = args.bearer_token
 
     openai.api_key = openAiApiKey
