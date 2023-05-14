@@ -11,7 +11,7 @@ def generate_quote(prompt: str, model: str):
     completion = openai.Completion.create(
         model=model,
         max_tokens=500,
-        temperature=0.7,
+        temperature=0.8,
         presence_penalty=0.6,
         prompt=prompt)
     inspirational_quote = completion.choices[0].text
@@ -70,9 +70,11 @@ def decorate_prompt(prompt: str, formatter: str):
     return formatter + prompt.lower() + " in around 100 words that will well received."
 
 if __name__ == "__main__":
+
     CURIOSITY_PROMPTS = [
-         "important concept in software engineering that should get more attention"
+        "important concept in software engineering that should get more attention"
     ]
+
     INSPIRATIONAL_PROMPTS = [
         "improving culture in software engineering companies"
         "Overcoming obstacles and adversity",
@@ -95,31 +97,24 @@ if __name__ == "__main__":
 
     FUN_FACT_TOPICS = [
         "Space",
-        "History",
-        "Music",
         "Science",
-        "Movies",
-        "Geography",
-        "Art",
-        "Inventions",
-        "Fashion",
-        "Literature",
-        "Mythology",
-        "Technology",
-        "Holidays",
-        "Transportation",
+        "Technology"
+    ]
+
+    SILLYNESS_TOPICS = [
+        "Tell a funny joke"
     ]
 
     PROMPT_SETS = {
-        0: {
-            'formatter': "Write an uplifting and inspirational quote about ",
-            'prompt_set': INSPIRATIONAL_PROMPTS,
-            'suffix': ""
-        },
-        1: {
+        'friday': {
             'formatter': "Write a fun fact about ",
             'prompt_set': FUN_FACT_TOPICS,
             'suffix': "Start the prompt with the words: \"Fun Fact: \""
+        },
+        'monday': {
+            'formatter': "Write an uplifting and inspirational quote about ",
+            'prompt_set': INSPIRATIONAL_PROMPTS,
+            'suffix': ""
         }
     }
 
@@ -132,13 +127,16 @@ if __name__ == "__main__":
     print()
     print(DEFAULT_PROMPT)
     print()
+
+
     parser = argparse.ArgumentParser(
         prog='Cat Pirate Quotes - LinkedIn',
         description='Uses chatGPT to generate text and post it to LinkedIn',
         epilog='Use with caution - who knows what chatGPT will say!')
     parser.add_argument('-s', '--post', required=False, action='store_true')
     parser.add_argument('-m', '--model', required=False, default="text-davinci-003")
-    parser.add_argument('-p', '--prompt', default=DEFAULT_PROMPT)
+    parser.add_argument('-p', '--prompt-set', required=True, default=DEFAULT_PROMPT)
+    parser.add_argument('-p', '--prompt-set', default="Tell me a silly joke")
 
     if os.path.exists(".env.development"):
         config = dotenv_values(".env.development")
